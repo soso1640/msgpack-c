@@ -26,6 +26,7 @@ To report an issue, use the [msgpack-c issue tracker](https://github.com/msgpack
 
 #### Install from git repository
 
+##### Using autotools
 You will need gcc (4.1.0 or higher), autotools.
 
 ```
@@ -37,6 +38,16 @@ $ make
 $ sudo make install
 ```
 
+##### Using cmake
+You will need gcc (4.1.0 or higher), cmake.
+
+```
+$ git clone https://github.com/msgpack/msgpack-c.git
+$ cd msgpack-c
+$ cmake .
+$ make
+```
+
 #### Install from package
 
 ##### UNIX-like platform with ./configure
@@ -44,9 +55,9 @@ $ sudo make install
 On typical UNIX-like platforms, download source package from [Releases](https://github.com/msgpack/msgpack-c/releases) and run `./configure && make && make install`. Example:
 
 ```
-$ wget https://github.com/msgpack/msgpack-c/releases/download/cpp-0.5.8/msgpack-0.5.8.tar.gz
-$ tar zxvf msgpack-0.5.8.tar.gz
-$ cd msgpack-0.5.8
+$ wget https://github.com/msgpack/msgpack-c/releases/download/cpp-0.5.9/msgpack-0.5.9.tar.gz
+$ tar zxvf msgpack-0.5.9.tar.gz
+$ cd msgpack-0.5.9
 $ ./configure
 $ make
 $ sudo make install
@@ -79,30 +90,45 @@ $ sudo brew install msgpack
 
 ##### Windows
 
-On Windows, download source package from [here](https://sourceforge.net/projects/msgpack/files/) and extract it. Open `msgpack_vc8.vcproj` or msgpack_vc2008 file and build it using batch build. It builds libraries in `lib/` folder and header files in `include/` folder.
-
-You can build using command line as follows:
+Clone msgpack-c git repository.
 
 ```
-> vcbuild msgpack_vc2008.vcproj
-> dir lib       % DLL files are here
-> dir include   % header files are here
+$ git clone https://github.com/msgpack/msgpack-c.git
 ```
 
+or using GUI git client. 
+
+e.g.) tortoise git https://code.google.com/p/tortoisegit/
+
+Launch cmake GUI client. http://www.cmake.org/cmake/resources/software.html
+
+Set 'Where is the source code:' text box and 'Where to build the binaries:' text box.
+
+Click 'Configure' button.
+
+Choose your Visual Studio version.
+
+Click 'Generate' button.
+
+Open the created msgpack.sln on Visual Studio.
+
+Build all.
 
 ### Linking with an Application
 
 Include `msgpack.hpp` (or `msgpack.h` for C) in your application and link with libmsgpack. Here is a typical gcc link command:
 
-    gcc -lmsgpack myapp.c -o myapp
+    g++ myapp.cpp -lmsgpack -o myapp
 
 
 ### Code Example
 ```CPP
 #include <msgpack.hpp>
 #include <vector>
+#include <string>
+#include <iostream>
 
-int main(void) {
+int main() {
     // This is target object.
     std::vector<std::string> target;
     target.push_back("Hello,");
